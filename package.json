@@ -1,0 +1,23 @@
+{
+ "name": "agnostic-rpc-socket",
+ "version": "0.0.1",
+ "description": "Link WebSocket to Agnostic RPC",
+ "keywords": [],
+ "author": {
+  "name": "John Murphy-Teixidor",
+  "email": "johnvmt@gmail.com"
+ },
+ "repository": {
+  "type": "git",
+  "url": "https://github.com/johnvmt/agnostic-rpc-socket"
+ },
+ "private": false,
+ "dependencies": {
+  "agnostic-rpc": "^1.2.0",
+  "esm": "^3.0.84",
+  "wolfy87-eventemitter": "^5.2.6"
+ },
+ "main": "index.js",
+ "module": "module.js",
+ "devDependencies": {}
+}
