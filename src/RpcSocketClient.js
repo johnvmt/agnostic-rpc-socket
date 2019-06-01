@@ -11,7 +11,7 @@ class RpcSocketClient extends EventEmitter {
 		self.client = new AgnosticRpcClient();
 
 		const onClientRequest = (request) => {
-			self.socket.send(request.encoded);
+			self.socket.send(JSON.stringify(request.encoded));
 		};
 
 		self.client.on('request', onClientRequest);
@@ -27,9 +27,15 @@ class RpcSocketClient extends EventEmitter {
 			self.emit('close');
 		});
 
-		self.socket.on('message', (encodedMessage) => {
-			if(AgnosticRpc.messageIsResponse(encodedMessage))
-				self.client.handleResponse(encodedMessage);
+		self.socket.on('message', (encodedMessageString) => {
+			try {
+				const encodedMessage = JSON.parse(encodedMessageString);
+				if(AgnosticRpc.messageIsResponse(encodedMessage))
+					self.client.handleResponse(encodedMessage);
+			}
+			catch(error) {
+				self.emit('error', error);
+			}
 		});
 
 		self.socket.on('close', () => {

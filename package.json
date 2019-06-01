@@ -1,6 +1,6 @@
 {
  "name": "agnostic-rpc-socket",
- "version": "0.0.2",
+ "version": "0.0.3",
  "description": "Link WebSocket to Agnostic RPC",
  "keywords": [],
  "author": {
