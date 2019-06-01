@@ -1,6 +1,6 @@
 {
  "name": "agnostic-rpc-socket",
- "version": "0.0.1",
+ "version": "0.0.2",
  "description": "Link WebSocket to Agnostic RPC",
  "keywords": [],
  "author": {
@@ -13,8 +13,8 @@
  },
  "private": false,
  "dependencies": {
-  "agnostic-rpc": "^1.2.0",
-  "esm": "^3.0.84",
+  "agnostic-rpc": "^1.2.1",
+  "esm": "^3.2.25",
   "wolfy87-eventemitter": "^5.2.6"
  },
  "main": "index.js",
