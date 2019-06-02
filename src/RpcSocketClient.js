@@ -1,5 +1,5 @@
 import EventEmitter from 'wolfy87-eventemitter';
-import {AgnosticRpcClient, AgnosticRpc} from 'agnostic-rpc';
+import {AgnosticRpcClient} from 'agnostic-rpc';
 
 class RpcSocketClient extends EventEmitter {
 	constructor(socket, options = {}) {
@@ -29,9 +29,7 @@ class RpcSocketClient extends EventEmitter {
 
 		self.socket.on('message', (encodedMessageString) => {
 			try {
-				const encodedMessage = JSON.parse(encodedMessageString);
-				if(AgnosticRpc.messageIsResponse(encodedMessage))
-					self.client.handleResponse(encodedMessage);
+				self.client.handleMessage(JSON.parse(encodedMessageString)); // Will ignore requests, and will only handle responses
 			}
 			catch(error) {
 				self.emit('error', error);

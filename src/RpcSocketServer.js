@@ -1,6 +1,6 @@
 // Link WebSocket with RPC Server and Client
 import EventEmitter from 'wolfy87-eventemitter';
-import {AgnosticRpcServer, AgnosticRpcClient, AgnosticRpc} from 'agnostic-rpc';
+import {AgnosticRpcServer} from 'agnostic-rpc';
 
 class RpcSocketServer extends EventEmitter {
 	constructor(socket, options = {}) {
@@ -40,8 +40,8 @@ class RpcSocketServer extends EventEmitter {
 		self.socket.on('message', (encodedMessageString) => {
 			try {
 				const encodedMessage = JSON.parse(encodedMessageString);
-				if(AgnosticRpc.messageIsRequest(encodedMessage))
-					self.server.handleRequest(encodedMessage);
+				encodedMessage.options = Object.assign(Object.assign((typeof encodedMessage.options === 'object' && encodedMessage.options !== null) ? encodedMessage.options : {}, {socket: socket}), encodedMessage); // Attach socket to options
+				self.server.handleMessage(encodedMessage); // Will ignore responses, will only handle requests
 			}
 			catch(error) {
 				self.emit('error', error);
